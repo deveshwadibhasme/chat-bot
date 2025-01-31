@@ -42,6 +42,7 @@ body {
     overflow-x: hidden;
     transition: all 0.4s ease-in;
     padding: 10px;
+    z-index: 5;
 }
 .container .chat-box .user-message,
 .container .chat-box .bot-message {
@@ -50,6 +51,7 @@ body {
     max-width: 300px;
     width: 100%;
     border-radius: 5px;
+    position: relative;
 }
 .container .chat-box .user-message {
     align-self: flex-end; 
@@ -94,4 +96,14 @@ body {
 .container form button:hover {
     background-color: #4866ee;
     cursor: pointer;
+}
+
+.stop-ai{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 30px;
+    background-color: red;
+    z-index: 10;
+    color: #000;
 }
