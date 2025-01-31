@@ -1,5 +1,4 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: rgb(95, 94, 94);
     display: flex;
     justify-content: center;
@@ -8,19 +7,19 @@ body {
     width: 100%;
 }
 * {
+    font-family: 'Noto Sans Hatran', sans-serif;
     box-sizing: border-box;
     margin: 0;
     scroll-behavior: smooth;
 }
 .container {
-    max-width: 400px;
+    max-width: 800px;
     width: 100%;
-    height: 770px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #121111;
     align-items: center;
-    border-radius: 20px;
     overflow: hidden;
     position: relative;
 }
@@ -34,8 +33,7 @@ body {
     width: 100%;
 }
 .container .chat-box {
-    background-color: rgb(38, 38, 38);
-    height: 88%;
+    max-height: 500px;
     width: 100%;
     position: relative;
     display: flex;
@@ -43,40 +41,39 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     transition: all 0.4s ease-in;
+    padding: 10px;
 }
-.container .chat-box .user-message,.container .chat-box .bot-message {
+.container .chat-box .user-message,
+.container .chat-box .bot-message {
     padding: 10px;
     background-color: wheat;
-    max-width: 200px;
+    max-width: 300px;
     width: 100%;
     border-radius: 5px;
 }
 .container .chat-box .user-message {
-    position: relative;
-    left: 48%;
+    align-self: flex-end; 
     color: green;
     margin-block: 5px;
 }
-
 .container .chat-box .bot-message {
-    position: relative;
-    left: 1%;
-    color: blue;
+    align-self: flex-start;
+    max-width: 400px;
 }
+
 #ai-response {
     overflow: hidden;
-    animation: typing 2s steps(20) 1s forwards
+    animation: typing 1s steps(15) forwards
 }
 @keyframes typing {
     0% {width: 0;}
-    50%{width: 50%;}
     100% {width: 100%;}
 }
 .container form {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    max-width: 400px;
+    /* max-width: 400px; */
     width: 100%;
     height: 50px;;
     max-width: #e9e2e2;

@@ -54,10 +54,10 @@ const generateAIResponse = async (prompt, user) => {
 
 function cleanUp(data, user) {
     const cleanData = data
-        .replace(/\* \*\*/g, '<br><b>')
-        .replace(/\*\*/g, '</b>')
-        .replace(/\./g, '.<br>')
-        .replace(/\:/g, ' :<br>')
+        .replace(/\*\*(.*?)\*\*/g, "<br><b>$1</b>")
+        // .replace(/\* \*\*(.*?)\*\*/g, "<br><b>$1</b><br>")
+        // .replace(/\./g, '.<br>')
+        // .replace(/\:/g, ' :<br>')
 
     fillChatBox(cleanData, user)
 }
@@ -73,7 +73,7 @@ function fillChatBox(data, user) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add(user ? 'user-message' : 'bot-message');
 
-    const label = document.createElement('h5');
+    const label = document.createElement('h3');
     label.textContent = user ? 'User' : 'Bot';
     messageDiv.appendChild(label);
     
@@ -84,11 +84,12 @@ function fillChatBox(data, user) {
     chatBox.appendChild(messageDiv);
     if (!user) {
         let i = 0;
-        const typingSpeed = 100;
+        const typingSpeed = 10;
 
         function typeMessage() {
             if (i < data.length) {
-                messagePara.innerHTML += data.charAt(i);
+                const typedData = data.substring(0, i + 1);
+                messagePara.innerHTML = typedData;
                 i++;
                 setTimeout(typeMessage, typingSpeed);
             }
