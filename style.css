@@ -44,6 +44,12 @@ body {
     padding: 10px;
     z-index: 5;
 }
+
+@media (max-width: 767px) {
+    .container .chat-box{
+        max-height: 90vh;
+    }
+}
 .container .chat-box .user-message,
 .container .chat-box .bot-message {
     padding: 10px;

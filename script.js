@@ -52,15 +52,11 @@ const generateAIResponse = async (prompt, user) => {
 
 }
 
-
 function cleanUp(data, user) {
     const cleanData = data
         .replace(/\*\*(.*?)\*\*/g, "<br><b>$1</b>")
     fillChatBox(cleanData, user)
 }
-
-
-
 
 function fillChatBox(data, user) {
     const messageDiv = document.createElement('div');
@@ -88,6 +84,8 @@ function fillChatBox(data, user) {
     });
 
     chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; 
+
     if (!user) {
         let i = 0;
         const typingSpeed = 10;
@@ -95,18 +93,23 @@ function fillChatBox(data, user) {
         function typeMessage() {
             if (i < data.length) {
                 if (!stopChat) {
-                const typedData = data.substring(0, i + 1);
-                messagePara.innerHTML = typedData;
-                i++;
-                setTimeout(typeMessage, typingSpeed);
+                    const typedData = data.substring(0, i + 1);
+                    messagePara.innerHTML = typedData;
+                    i++;
+                    setTimeout(typeMessage, typingSpeed);
+                    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
                 } else {
                     stopChat = false;
+                }
+                if(i === data.length) {
+                    stopAI.remove();
                 }
             }
         }
         typeMessage();
+
     } else {
         messagePara.innerHTML = data;
     }
-    chatBox.scrollBy(0, chatBox.scrollHeight)
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
 }
