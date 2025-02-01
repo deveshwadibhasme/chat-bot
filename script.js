@@ -16,7 +16,7 @@ nameForm.addEventListener('submit', (e) => {
     if (nameInput.value === '') return
     userName = nameInput.value.charAt(0).toUpperCase() +  nameInput.value.slice(1)
     popUp.style.display = 'none'
-    generateAIResponse('Hi', !user)
+    generateAIResponse(`Hi My Name is ${userName} greet me with my name and say this "I am AI ChatBot developed by Devesh Wadibhasme using GEMINI API How will i help you today"`, !user)
 });
 
 console.log(userName);
@@ -40,7 +40,7 @@ const generateAIResponse = async (prompt, user) => {
     const body = JSON.stringify({
         contents: [{
             parts: [{
-                text: `My Name is ${userName} ${prompt}`
+                text: prompt
             }]
         }]
     });
