@@ -14,7 +14,7 @@ let userName = 'User'
 nameForm.addEventListener('submit', (e) => {
     e.preventDefault()
     if (nameInput.value === '') return
-    userName = nameInput.value.charAt(0).toUpperCase() +  nameInput.value.slice(1)
+    userName = nameInput.value.charAt(0).toUpperCase() + nameInput.value.slice(1)
     popUp.style.display = 'none'
     generateAIResponse(`Hi My Name is ${userName} greet me with my name and say this "I am AI ChatBot developed by Devesh Wadibhasme using GEMINI API How will i help you today"`, !user)
 });
@@ -67,6 +67,8 @@ const generateAIResponse = async (prompt, user) => {
 
 function cleanUp(data, user) {
     const cleanData = data
+        .replace(/```\s*(\w+)/g, '<pre><code class="language-$1">')
+        .replace(/```/g, '</code></pre>')
         .replace(/\*\*(.*?)\*\*/g, "<b>$1</b><br>")
         .replace(/\*/g, "<br>• ")
         .replace(/(?<!\b\d)\./g, "<br>")
