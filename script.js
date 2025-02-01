@@ -4,15 +4,28 @@ const APIURL = GEMINI.API + '?key=' + GEMINI.KEY;
 const userForm = document.querySelector('form')
 const chatBox = document.querySelector('.chat-box')
 const userInput = document.querySelector('#prompt-input')
+const nameForm = document.querySelector('.pop-up-note form')
+const nameInput = document.querySelector('.pop-up-note form input[type="text"]')
+const popUp = document.querySelector('.pop-up-note')
 let user = true
 let stopChat = false
+let userName = 'User'
 
+nameForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    if (nameInput.value === '') return
+    userName = nameInput.value.charAt(0).toUpperCase() +  nameInput.value.slice(1)
+    popUp.style.display = 'none'
+    generateAIResponse('Hi', !user)
+});
+
+console.log(userName);
 
 userForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const message = userInput.value
-    if(userInput.value === '') return
+    if (userInput.value === '') return
     fillChatBox(message, user)
     generateAIResponse(message, !user)
 
@@ -27,7 +40,7 @@ const generateAIResponse = async (prompt, user) => {
     const body = JSON.stringify({
         contents: [{
             parts: [{
-                text: prompt
+                text: `My Name is ${userName} ${prompt}`
             }]
         }]
     });
@@ -54,7 +67,9 @@ const generateAIResponse = async (prompt, user) => {
 
 function cleanUp(data, user) {
     const cleanData = data
-        .replace(/\*\*(.*?)\*\*/g, "<br><b>$1</b>")
+        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b><br>")
+        .replace(/\*/g, "<br>• ")
+        .replace(/(?<!\b\d)\./g, "<br>")
     fillChatBox(cleanData, user)
 }
 
@@ -63,7 +78,7 @@ function fillChatBox(data, user) {
     messageDiv.classList.add(user ? 'user-message' : 'bot-message');
 
     const label = document.createElement('h3');
-    label.textContent = user ? 'User' : 'Bot';
+    label.textContent = user ? '👨🏿‍⚖️ User' : '🤖 Bot';
     messageDiv.appendChild(label);
 
     const messagePara = document.createElement('p');
@@ -78,13 +93,13 @@ function fillChatBox(data, user) {
         messageDiv.append(stopAI);
     }
 
-    stopAI.addEventListener('click', ()=> {
+    stopAI.addEventListener('click', () => {
         stopChat = true
         stopAI.remove();
     });
 
     chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight; 
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     if (!user) {
         let i = 0;
@@ -101,7 +116,7 @@ function fillChatBox(data, user) {
                 } else {
                     stopChat = false;
                 }
-                if(i === data.length) {
+                if (i === data.length) {
                     stopAI.remove();
                 }
             }
@@ -111,5 +126,4 @@ function fillChatBox(data, user) {
     } else {
         messagePara.innerHTML = data;
     }
-    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
 }

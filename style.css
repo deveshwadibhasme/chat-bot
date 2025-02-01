@@ -1,115 +1,161 @@
 body {
-    background-color: rgb(95, 94, 94);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
 }
 * {
-    font-family: 'Noto Sans Hatran', sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    scroll-behavior: smooth;
+  font-family: "Noto Sans Hatran", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  scroll-behavior: smooth;
 }
 .container {
-    max-width: 800px;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #121111;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
+  max-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #775f3a;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 .container h1 {
-    font-size: 24px;
-    background-color: #e9e2e2;
-    font-weight: 600;
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 5px;
-    width: 100%;
+  font-size: 20px;
+  background-color: #f09846;
+  font-weight: 600;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  max-width: 200px;
+  width: 100%;
+  height: 50px;
+  text-transform: uppercase;
+  clip-path: polygon(0 65%, 0 0, 100% 0, 100% 65%, 49% 100%);
 }
 .container .chat-box {
-    max-height: 500px;
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    transition: all 0.4s ease-in;
-    padding: 10px;
-    z-index: 5;
+  max-height: 500px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.4s ease-in;
+  padding: 10px;
+  z-index: 5;
+}
+
+.container .chat-box .user-message,
+.container .chat-box .bot-message {
+  padding: 10px;
+  background-color: wheat;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+.container .chat-box .user-message {
+  align-self: flex-end;
+  color: green;
+  margin-block: 5px;
+}
+.container .chat-box .bot-message {
+  align-self: flex-start;
 }
 
 @media (max-width: 767px) {
-    .container .chat-box{
-        max-height: 90vh;
-    }
-}
-.container .chat-box .user-message,
-.container .chat-box .bot-message {
-    padding: 10px;
-    background-color: wheat;
-    max-width: 300px;
-    width: 100%;
-    border-radius: 5px;
-    position: relative;
-}
-.container .chat-box .user-message {
-    align-self: flex-end; 
-    color: green;
-    margin-block: 5px;
-}
-.container .chat-box .bot-message {
-    align-self: flex-start;
+  .container .chat-box {
+    max-height: 90vh;
+  }
+  .container .chat-box .user-message,
+  .container .chat-box .bot-message {
     max-width: 400px;
+    width: 100%;
+  }
 }
 
 #ai-response {
-    overflow: hidden;
-    animation: typing 1s steps(15) forwards
+  overflow: hidden;
+  animation: typing 1s steps(15) forwards;
 }
 @keyframes typing {
-    0% {width: 0;}
-    100% {width: 100%;}
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 .container form {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    /* max-width: 400px; */
-    width: 100%;
-    height: 50px;;
-    max-width: #e9e2e2;
-    display: flex;
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 700px;
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+  overflow: hidden;
 }
 .container form input {
-    width: 90%;
-    padding: 5px;
-    border: 0px;
-    outline: 0;
+  width: 90%;
+  padding: 5px;
+  padding-inline: 10px;
+  border: 0px;
+  outline: 0;
 }
 .container form button {
-    background-color: skyblue;
-    border: 0;
-    width: 20%;
-    font-size: 16px;
+  background-color: skyblue;
+  border: 0;
+  width: 20%;
+  font-size: 16px;
 }
 .container form button:hover {
-    background-color: #4866ee;
-    cursor: pointer;
+  background-color: #4866ee;
+  cursor: pointer;
 }
 
-.stop-ai{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    border-radius: 30px;
-    background-color: red;
-    z-index: 10;
-    color: #000;
+.container .pop-up-note {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #e9e2e270;
+  backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.container .pop-up-note form {
+  display: flex;
+  justify-content: center;
+  transform: translate(-50%,-150%);
+  max-width: 300px;
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+  overflow: hidden;
+  align-self:center;
+}
+
+.stop-ai {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  border-radius: 30px;
+  background-color: red;
+  z-index: 10;
+  color: #000;
 }
